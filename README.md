@@ -24,6 +24,10 @@ app/
 │   └── orchestrator.py  # Coordinates LLM → evaluation → DB
 ├── models/test_result.py # Database model
 └── db/                   # Session, base, init
+tests/
+├── conftest.py           # Shared fixtures (in-memory DB, mocked LLM)
+├── test_api.py           # API integration tests
+└── test_test_runner.py   # Unit tests for evaluation logic
 ```
 
 ## Setup
@@ -152,23 +156,23 @@ The `llm_judge` test type implements an LLM-based evaluation pattern where one o
 
 The following papers are relevant to the evaluation techniques used in this project.
 
-1. Zheng, L., et al. (2023). [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685). *NeurIPS*.
+1. Zheng, L., Chiang, W.-L., Sheng, Y., et al. (2023). [Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685). *arXiv*.  
    Evaluates LLMs as judges via pairwise comparison and benchmarks them against human preferences.
 
-2. Liu, Y., et al. (2023). [G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment](https://arxiv.org/abs/2303.16634). *EMNLP*.
-   Uses GPT-4 with rubric-based, chain-of-thought evaluation to better align automated scores with human judgments.
+2. Liu, Y., Xu, Q., Zhang, X., et al. (2024). [G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment](https://arxiv.org/abs/2303.16634). *EMNLP 2024 Findings*.  
+   Uses GPT-4 with rubric-based evaluation to better align automated scores with human judgments.
 
-3. Madaan, A., et al. (2023). [Self-Refine: Iterative Refinement with Self-Feedback](https://arxiv.org/abs/2303.17651). *NeurIPS*.
-   Introduces a generate → critique → refine loop using LLM self-feedback to iteratively improve outputs.
+3. Madaan, A., Tandon, N., Gupta, P., et al. (2023). [Self-Refine: Iterative Refinement with Self-Feedback](https://arxiv.org/abs/2303.17651). *NeurIPS 2023*.  
+   Introduces a generate → critique → refine loop using LLM self-feedback.
 
-4. Bai, Y., et al. (2022). [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073). *Anthropic*.
-   Uses rule-based critique and revision to guide model outputs toward desired behaviour without human labels.
+4. Bai, Y., Kadavath, S., Kundu, S., et al. (2022). [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073). *arXiv*.  
+   Uses rule-based critique and revision to guide model outputs.
 
-5. Gu, J., et al. (2024). [LLM-as-a-Judge: A Survey](https://arxiv.org/abs/2411.15594).
-   Surveys evaluation approaches including scoring, pairwise ranking, and sources of bias in LLM-based evaluation.
+5. Gu, J., et al. (2024). [LLM-as-a-Judge: A Survey](https://arxiv.org/abs/2411.15594). *arXiv*.  
+   Surveys evaluation methods and biases in LLM-based judging.
 
-6. Wang, P., et al. (2024). [Large Language Models are not Fair Evaluators](https://arxiv.org/abs/2305.17926). *ACL*.
-   Highlights positional bias and inconsistency in single-judge setups, motivating the multi-judge approach.
+6. Wang, P., et al. (2023). [Large Language Models are not Fair Evaluators](https://arxiv.org/abs/2305.17926). *ACL 2023 Findings*.  
+   Highlights positional bias and inconsistency in single-judge setups.
 
 ## Running Tests
 
