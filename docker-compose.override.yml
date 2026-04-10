@@ -1,0 +1,15 @@
+# Automatically applied on top of docker-compose.yml during local development.
+# docker compose up                         → dev mode (this file applied automatically)
+# docker compose -f docker-compose.yml up   → production (no overrides)
+services:
+  api:
+    volumes:
+      - .:/app                      # code hot-reload
+      - db_data:/app/data           # writable DB volume, owned by container user
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      - DATABASE_URL=sqlite:///./data/llm_eval.db
+
+volumes:
+  db_data:
+  ollama_data:
